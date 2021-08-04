@@ -1,5 +1,7 @@
 ﻿using LanchesMac.Repositories;
+using LanchesMac.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace LanchesMac.Controllers
 {
@@ -16,11 +18,11 @@ namespace LanchesMac.Controllers
 
         public IActionResult List()
         {
-            ViewBag.Lanche = "Lanches";
-            ViewData["Categoria"] = "Categorias";
             var lanches = _lancheRepository.Lanches;
-
-            return View(lanches);
+            var lancheListViewModel = new LancheListViewModel();
+            lancheListViewModel.Lanches = lanches;
+            lancheListViewModel.CategoriaAtual = "Categoria Atual";
+            return View(lancheListViewModel);
         }
     }
 }
